@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flip Cards — Cybersecurity พื้นฐานสำหรับพนักงาน</title>
+<meta name="description" content="Flash Cards: Cybersecurity พื้นฐานสำหรับพนักงาน">
+<style>
+  :root{
+    --blue:#0a68b4; --pink:#e85aad;
+    --ink:#0f172a; --muted:#64748b;
+    --bg:#f7f9fc; --card:#ffffff; --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,'Noto Sans Thai',sans-serif;line-height:1.65}
+  header.hero{background:linear-gradient(135deg,var(--blue),var(--pink));color:#fff;padding:10px 12px;border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);box-shadow:0 10px 26px rgba(0,0,0,.12)}
+  .container{max-width:1080px;margin:0 auto;padding:18px 14px 120px}
+  .logoBox{width:96px;height:96px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center}
+  .logoBox img{width:100%;height:100%;object-fit:contain}
+  h1.title{margin:.2rem 0 .4rem;font-size:clamp(24px,3.5vw,36px);text-shadow:0 3px 10px rgba(0,0,0,.22);text-align:center}
+  .nav{display:flex;gap:10px;justify-content:center;margin-bottom:8px}
+  .nav a{color:#fff;text-decoration:underline;font-weight:800}
+
+  .grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:16px;margin-top:14px}
+  @media (min-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (min-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+  .card-wrap{perspective:1200px}
+  .card{
+    position: relative;
+    height:420px;
+    border-radius:18px;
+    transform-style:preserve-3d;
+    transition:transform .55s ease;
+    box-shadow:0 10px 18px rgba(0,0,0,.07);
+    cursor:pointer;
+  }
+  @media (max-width:480px){ .card{height:360px} }
+  .card.flipped{transform:rotateY(180deg)}
+
+  .face{
+    position:absolute;
+    inset:0;
+    border-radius:18px;
+    background:var(--card);
+    border:1px solid #e5eaf1;
+    padding:22px;
+    backface-visibility:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .face.front::before{content:'';position:absolute;inset:0;border-top-left-radius:18px;border-top-right-radius:18px;background:linear-gradient(90deg,var(--blue),var(--pink));height:6px;top:0}
+  .face.back{transform:rotateY(180deg);background:#f3f6fb}
+  .face.front h2{margin:0 0 .5rem;font-weight:900;font-size:clamp(20px,3.6vw,28px)}
+  .face.back p{margin:0 auto;max-width:90%;font-size:clamp(16px,2.4vw,18px);line-height:1.8}
+
+  .section-title{margin:18px 6px 6px;font-size:1.15rem;font-weight:900;color:#0a68b4;text-align:left}
+  footer.sticky{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #e6e9f0;padding:8px 12px}
+  .footrow{max-width:1080px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .note{color:#64748b;font-size:.9rem}
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="logoBox"><img src="LOGOADLER.png" alt="ADLER Logo"></div>
+    <div class="container" style="padding-top:0">
+      <h1 class="title">🔐 ชุด Flash Cards: Cybersecurity พื้นฐานสำหรับพนักงาน</h1>
+      <div class="nav"><a href="./index.html">⬅ กลับหน้าแรก</a></div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="section-title">🧩 หมวด 1: การรู้เท่าทันภัยไซเบอร์</div>
+    <div class="grid" id="g1"></div>
+
+    <div class="section-title">💻 หมวด 2: การใช้ Email และ Internet อย่างปลอดภัย</div>
+    <div class="grid" id="g2"></div>
+
+    <div class="section-title">🧑‍💻 หมวด 3: รหัสผ่านและการยืนยันตัวตน</div>
+    <div class="grid" id="g3"></div>
+
+    <div class="section-title">🧱 หมวด 4: อุปกรณ์และข้อมูล</div>
+    <div class="grid" id="g4"></div>
+
+    <div class="section-title">🌐 หมวด 5: การจัดการข้อมูลและ PDPA</div>
+    <div class="grid" id="g5"></div>
+
+    <div class="section-title">🚨 หมวด 6: เมื่อเกิดเหตุผิดปกติ</div>
+    <div class="grid" id="g6"></div>
+
+    <div style="text-align:center;margin-top:10px"><a href="./index.html" style="color:#0a68b4;font-weight:800;text-decoration:underline">⬅ กลับหน้าแรก</a></div>
+  </div>
+
+  <footer class="sticky">
+    <div class="footrow"><div class="note">© 2025 Adler — Flip Cards</div><div class="note"><a href="./index.html">หน้าแรก</a></div></div>
+  </footer>
+
+<script>
+const data = [
+  {cat:'g1', items:[
+    {front:'Card 1 – Phishing คืออะไร?', back:'คือ อีเมล หรือ ข้อความ ที่ปลอมเป็นหน่วยงานหรือคนที่รู้จัก เพื่อหลอกให้คลิกลิงก์หรือเปิดไฟล์แนบ จำง่าย: ถ้าไม่แน่ใจ อย่าคลิก'},
+    {front:'Card 2 – Social Engineering', back:'การหลอกให้เราทำบางอย่าง เช่น ให้รหัสผ่าน หรือลงโปรแกรม โดยอ้างว่าเป็น IT หรือหัวหน้า เคล็ดลับ: ถ้ามีใครขอข้อมูลส่วนตัว ให้ตรวจสอบตัวตนก่อนเสมอ'}
+  ]},
+  {cat:'g2', items:[
+    {front:'Card 3 – อย่าคลิกลิงก์แปลกปลอม', back:'ลิงก์สั้น หรือ ลิงก์สะกดคล้ายชื่อองค์กร อาจนำไปสู่เว็บปลอม ตรวจสอบ: ชื่อโดเมน HTTPS และไอคอน 🔒'},
+    {front:'Card 4 – ห้ามเปิดไฟล์แนบที่ไม่รู้จัก', back:'มัลแวร์มักมากับไฟล์ .docx .pdf .zip หรือ .exe จำไว้: ถ้าไม่คุ้น → อย่าเปิด'}
+  ]},
+  {cat:'g3', items:[
+    {front:'Card 5 – รหัสผ่านที่ดีควรเป็นอย่างไร?', back:'ยาวอย่างน้อย 12 ตัวอักษร มี A–Z a–z 0–9 และสัญลักษณ์ เช่น ! @ # $ ไม่ควรใช้วันเกิด หรือชื่อเล่น'},
+    {front:'Card 6 – เปิด 2FA ทุกระบบที่ทำได้', back:'ยืนยันตัวตนสองขั้นตอน (รหัสผ่าน + OTP หรือ App Auth) ช่วยลดความเสี่ยง > 90 % ของการถูกแฮก'}
+  ]},
+  {cat:'g4', items:[
+    {front:'Card 7 – ล็อกหน้าจอทุกครั้งเมื่อไม่อยู่ที่โต๊ะ', back:'ใช้ Win + L หรือ Ctrl + Alt + Del แล้ว Lock เหตุผล: ป้องกันคนอื่นเข้าถึงข้อมูลโดยไม่ได้รับอนุญาต'},
+    {front:'Card 8 – ห้ามใช้ USB ไม่ทราบที่มา', back:'อาจมีไวรัสหรือมัลแวร์แฝงอยู่ แนวปฏิบัติ: ใช้เฉพาะ USB ที่ผ่านการตรวจจาก IT หรือเข้ารหัส'}
+  ]},
+  {cat:'g5', items:[
+    {front:'Card 9 – ข้อมูลส่วนบุคคลคืออะไร?', back:'ชื่อ ที่อยู่ เลขบัตรประชาชน เบอร์โทร อีเมล รูปถ่าย ห้าม: แชร์ข้อมูลลูกค้ากับบุคคลภายนอกโดยไม่ได้รับอนุญาต'},
+    {front:'Card 10 – การส่งข้อมูลต้องเข้ารหัสเสมอ', back:'ใช้ Secure FTP หรือ Web ที่มี HTTPS ห้ามส่งข้อมูลส่วนบุคคลผ่าน Line / อีเมลส่วนตัว'}
+  ]},
+  {cat:'g6', items:[
+    {front:'Card 11 – ถ้าเจอสิ่งน่าสงสัย ควรทำอย่างไร?', back:'หยุดใช้งานทันที ถ่ายภาพหน้าจอเก็บไว้ แจ้งฝ่าย IT หรือ Security Officer ภายใน 1 ชั่วโมง'},
+    {front:'Card 12 – การรายงานเหตุการณ์ (Incident Report)', back:'ช่องทาง: Line กลุ่ม IT / โทรภายใน / อีเมล ห้ามแก้ไขหรือลบไฟล์ด้วยตนเอง'}
+  ]}
+];
+
+function makeCard(front, back){
+  const w = document.createElement('div'); w.className='card-wrap';
+  const card = document.createElement('div'); card.className='card';
+  const f = document.createElement('div'); f.className='face front';
+  f.innerHTML = '<h2>'+front+'</h2>';
+  const b = document.createElement('div'); b.className='face back';
+  b.innerHTML = '<p>'+back+'</p>';
+  card.appendChild(f); card.appendChild(b);
+  w.appendChild(card);
+  w.addEventListener('click', ()=> card.classList.toggle('flipped'));
+  return w;
+}
+
+function render(){
+  data.forEach(group => {
+    const host = document.getElementById(group.cat);
+    group.items.forEach(item => host.appendChild(makeCard(item.front, item.back)));
+  });
+}
+render();
+</script>
+</body>
+</html>
